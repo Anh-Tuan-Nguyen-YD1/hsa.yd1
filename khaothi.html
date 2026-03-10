@@ -30,60 +30,70 @@
 
         #login-screen {
             background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 45px 35px 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04), 0 5px 15px rgba(211, 47, 47, 0.05); 
             text-align: center;
-            width: 200px;
+            width: 370px;
             max-width: 90%;
         }
 
         #login-screen img {
-            max-width: 200px;
-            margin-bottom: 20px;
+            max-width: 170px;
+            margin-bottom: 25px;
         }
 
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             text-align: left;
         }
 
         .input-group label {
             display: block;
             margin-bottom: 8px;
+            font-size: 14px; 
             font-weight: 600;
-            color: #333;
+            color: #555;
         }
 
         .input-group input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
+            padding: 14px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
             outline: none;
-            transition: border 0.3s;
+            background-color: #fafafa;
+            transition: all 0.3s ease;
         }
 
         .input-group input:focus {
             border-color: #d32f2f;
+            background-color: #fff;
+            /* Thêm vòng sáng viền đỏ nhạt khi click vào ô nhập */
+            box-shadow: 0 0 0 4px rgba(211, 47, 47, 0.1); 
         }
 
         .btn-login {
             background-color: #d32f2f;
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 14px 20px; /* Đồng bộ chiều cao với ô input */
             width: 100%;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 600;
+            letter-spacing: 0.5px; /* Giãn chữ nhẹ giúp dễ đọc */
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            /* Thêm bóng đổ nhẹ cho nút bấm */
+            box-shadow: 0 4px 12px rgba(211, 47, 47, 0.25); 
         }
 
         .btn-login:hover {
             background-color: #b71c1c;
+            transform: translateY(-2px); /* Hiệu ứng nhấc nhẹ nút lên khi rê chuột */
+            box-shadow: 0 6px 15px rgba(211, 47, 47, 0.35);
         }
 
         #main-screen {
