@@ -28,18 +28,30 @@
             background-color: #ffe6e6;
         }
 
-        #login-screen {
+            #login-screen {
             background: white;
-            padding: 45px 35px 40px;
+            /* Tăng padding trên/dưới và trái/phải để mở rộng không gian bên trong */
+            padding: 70px 50px 60px; 
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04), 0 5px 15px rgba(211, 47, 47, 0.05); 
             text-align: center;
-            width: 20%;
+            /* Đổi từ 20% sang width cố định để nó to ra bằng khung đen */
+            width: 480px; 
+            /* Thêm max-width để form không bị vỡ trên màn hình điện thoại nhỏ */
+            max-width: 90%; 
+            /* Ép chiều cao tối thiểu cho form */
+            min-height: 420px; 
+            /* Căn giữa các nội dung bên trong theo chiều dọc */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         #login-screen img {
-            width: 100%;
-            margin-bottom: 25px;
+            /* Giảm width của ảnh xuống 80% để khi form to ra, logo không bị phóng quá khổ */
+            width: 80%; 
+            /* Căn giữa logo và đẩy khoảng cách phía dưới rộng ra */
+            margin: 0 auto 35px auto; 
         }
 
         .input-group {
@@ -50,7 +62,7 @@
         .input-group label {
             display: block;
             margin-bottom: 8px;
-            font-size: 20px; 
+            font-size: 18px; 
             font-weight: 600;
             color: #555;
         }
