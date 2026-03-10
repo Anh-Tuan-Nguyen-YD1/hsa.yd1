@@ -47,32 +47,31 @@
             justify-content: center;
         }
 
-        #login-screen img {
-            /* Giảm width của ảnh xuống 80% để khi form to ra, logo không bị phóng quá khổ */
-            width: 80%; 
-            /* Căn giữa logo và đẩy khoảng cách phía dưới rộng ra */
-            margin: 0 auto 35px auto; 
+#login-screen img {
+            width: 85%; /* Cho logo to lên một chút so với khung */
+            max-width: 340px; /* Giới hạn độ to tối đa để không bị vỡ nét */
+            margin: 0 auto 40px auto; /* Tăng khoảng cách từ logo xuống chữ "Nhập số báo danh" */
         }
 
-        .input-group {
-            margin-bottom: 25px;
+.input-group {
+            margin-bottom: 35px; /* Tăng khoảng cách từ ô nhập liệu xuống nút Đăng nhập */
             text-align: left;
         }
 
         .input-group label {
             display: block;
-            margin-bottom: 8px;
-            font-size: 18px; 
+            margin-bottom: 12px; /* Giãn cách chữ và ô nhập */
+            font-size: 20px; /* Chữ "Nhập số báo danh" giữ nguyên hoặc tăng nhẹ lên 22px tùy ý */
             font-weight: 600;
             color: #555;
         }
 
         .input-group input {
             width: 100%;
-            padding: 14px 16px;
+            padding: 18px 20px; /* Tăng độ dày (chiều cao) của ô nhập liệu để dễ nhìn hơn */
             border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 15px;
+            border-radius: 12px; /* Bo góc tròn mềm mại hơn */
+            font-size: 16px; /* Chữ bên trong ô nhập to và rõ hơn */
             outline: none;
             background-color: #fafafa;
             transition: all 0.3s ease;
@@ -81,29 +80,27 @@
         .input-group input:focus {
             border-color: #d32f2f;
             background-color: #fff;
-            /* Thêm vòng sáng viền đỏ nhạt khi click vào ô nhập */
             box-shadow: 0 0 0 4px rgba(211, 47, 47, 0.1); 
         }
 
-        .btn-login {
+.btn-login {
             background-color: #d32f2f;
             color: white;
             border: none;
-            padding: 14px 20px; /* Đồng bộ chiều cao với ô input */
+            padding: 18px 20px; /* Chiều cao nút bấm bằng với chiều cao ô input cho đồng bộ */
             width: 100%;
-            border-radius: 10px;
-            font-size: 18px;
+            border-radius: 12px; /* Bo góc đồng bộ với ô input */
+            font-size: 20px; /* Chữ Đăng nhập to, rõ ràng, mạnh mẽ hơn */
             font-weight: 600;
-            letter-spacing: 0.5px; /* Giãn chữ nhẹ giúp dễ đọc */
+            letter-spacing: 0.5px; 
             cursor: pointer;
             transition: all 0.3s ease;
-            /* Thêm bóng đổ nhẹ cho nút bấm */
             box-shadow: 0 4px 12px rgba(211, 47, 47, 0.25); 
         }
 
         .btn-login:hover {
             background-color: #b71c1c;
-            transform: translateY(-2px); /* Hiệu ứng nhấc nhẹ nút lên khi rê chuột */
+            transform: translateY(-2px); 
             box-shadow: 0 6px 15px rgba(211, 47, 47, 0.35);
         }
 
