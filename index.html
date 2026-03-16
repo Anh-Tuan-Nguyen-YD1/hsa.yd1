@@ -507,38 +507,50 @@
             var resultWrapper = document.getElementById('resultWrapper');
             var pdfFrame = document.getElementById('pdfFrame');
 
-            // Tạo hàm thử tải file với nhiều trường hợp (hoa/thường)
-            function attemptLoad(idToTry) {
+            // Tạo danh sách các định dạng tên cần thử (Gốc -> In hoa -> In thường)
+            // Dùng Set để loại bỏ các trường hợp bị trùng lặp (ví dụ rawId đã là in thường rồi)
+            var variationsToTry = [...new Set([
+                rawId, 
+                rawId.toUpperCase(), 
+                rawId.toLowerCase()
+            ])];
+            
+            var currentIndex = 0;
+
+            // Hàm đệ quy thử lần lượt từng trường hợp trong mảng
+            function attemptLoad() {
+                // Nếu đã thử hết các kiểu mà vẫn lỗi -> Báo lỗi thực sự
+                if (currentIndex >= variationsToTry.length) {
+                    loading.style.display = 'none'; 
+                    errorScreen.style.display = 'flex'; 
+                    return;
+                }
+
+                var idToTry = variationsToTry[currentIndex];
                 var filePath = "loigiai/" + idToTry + ".pdf";
                 var testScript = document.createElement('script');
                 testScript.src = filePath;
                 
+                // Nếu tìm thấy file
                 testScript.onload = function() {
-                    currentSearchId = idToTry;
+                    currentSearchId = idToTry; // Lưu ID đúng để nút Toàn màn hình xài
                     loading.style.display = 'none'; 
                     resultWrapper.style.display = 'flex'; 
                     pdfFrame.src = filePath + "#toolbar=0&navpanes=0&scrollbar=0&view=FitH"; 
                     testScript.remove(); 
                 };
 
+                // Nếu không tìm thấy file, thử trường hợp tiếp theo
                 testScript.onerror = function() { 
                     testScript.remove(); 
-                    // Fallback: Thử tiếp các trường hợp khác
-                    if (idToTry === rawId) {
-                        attemptLoad(rawId.toLowerCase()); // Thử viết thường (VD: tìm dahoa2)
-                    } else if (idToTry === rawId.toLowerCase()) {
-                        attemptLoad(rawId.toUpperCase()); // Thử viết hoa (VD: tìm TOAN9)
-                    } else {
-                        // Thử 3 cách đều thất bại mới báo lỗi
-                        loading.style.display = 'none'; 
-                        errorScreen.style.display = 'flex'; 
-                    }
+                    currentIndex++; // Tăng số thứ tự để thử kiểu chữ khác
+                    attemptLoad();  // Lặp lại việc load
                 };
                 
                 document.head.appendChild(testScript);
             }
 
-            attemptLoad(rawId); // Bắt đầu thử
+            attemptLoad(); // Bắt đầu thử nghiệm từ phần tử đầu tiên
         }
 
         function openNewTab() { if (currentSearchId) { window.open("loigiai/" + currentSearchId + ".pdf", '_blank'); } }
