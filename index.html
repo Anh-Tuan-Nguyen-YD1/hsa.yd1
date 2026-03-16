@@ -513,7 +513,8 @@
                 var testScript = document.createElement('script');
                 testScript.src = filePath;
                 
-                testScript.onload = function() { 
+                testScript.onload = function() {
+                    currentSearchId = idToTry;
                     loading.style.display = 'none'; 
                     resultWrapper.style.display = 'flex'; 
                     pdfFrame.src = filePath + "#toolbar=0&navpanes=0&scrollbar=0&view=FitH"; 
