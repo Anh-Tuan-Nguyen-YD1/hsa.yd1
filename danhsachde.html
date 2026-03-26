@@ -67,7 +67,9 @@
         
         /* Màu Đỏ (TSA) */
         .tag-red { background: #f8d7da; color: #d32f2f; border-color: #f1aeb5; }
-
+        
+        /* Màu Neon (Tiếng Anh) */
+        .tag-english { background: #1a237e; color: #ffffff; border-color: #7b1fa2; }
 
         .exam-name { margin-top: 25px; font-weight: 700; font-size: 16px; margin-bottom: 20px; line-height: 1.4; color: #333; }
         .btn-continue { width: 100%; border: 1px solid #0d6efd; color: #0d6efd; background: white; padding: 8px; border-radius: 20px; font-weight: 600; transition: 0.3s; text-transform: uppercase; font-size: 14px; }
@@ -239,6 +241,7 @@
             { id: 8, name: "8. KHOA HỌC HSA (MAPSTUDY)", tag: "HSA" },
             { id: 9, name: "9. ĐỊNH LƯỢNG HSA (HOCMAI, MAPSTUDY)", tag: "HSA" },
             { id: 10, name: "10. HOÁ (NAP SCHOOL)", tag: "THPT" },
+            { id: 11, name: "11. READING & SPEAKING", tag: "Tiếng Anh" },
         ];
 
         // KHAI BÁO FILE TRONG FOLDER
@@ -292,6 +295,8 @@ function renderExams() {
                     tagClass = 'tag-blue';
                 } else if (exam.tag === 'TSA') {
                     tagClass = 'tag-red';
+                } else (exam.tag === 'Tiếng Anh') {
+                    tagClass = 'tag-english';
                 }
 
                 const html = `
