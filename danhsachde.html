@@ -156,12 +156,20 @@
             </div>
 
             <!-- FOLDER VIEW CẬP NHẬT -->
+            <!-- FOLDER VIEW CẬP NHẬT -->
             <div id="folderView">
-                <div class="text-start mb-3">
-                    <span class="back-link" onclick="goBackToAuth()"><i class="fa-solid fa-arrow-left"></i> Quay lại nhập mã</span>
+                <!-- Header của Folder: Nút back bên trái, Ghi chú ở giữa -->
+                <div class="d-flex align-items-center justify-content-center position-relative mb-3" style="width: 100%; min-height: 40px;">
+                    <span class="back-link position-absolute start-0" onclick="goBackToAuth()" style="margin: 0; z-index: 10;">
+                        <i class="fa-solid fa-arrow-left"></i> Quay lại nhập mã
+                    </span>
+                    <h3 class="m-0 fw-bold text-dark" id="folderNoteText">Ghi chú: Nếu không thấy chỗ ghi ID thì ID chính là các kí tự hiện trên thanh bạn nhấp vào<span id="dynamicNote" style="font-weight: 500; font-size: 1.2rem; color: #d32f2f;"></span></h3>
                 </div>
+
                 <!-- TITLE HIỂN THỊ TÊN THƯ MỤC / CHỦ ĐỀ -->
                 <h4 id="folderViewTitle" class="text-center mb-4" style="color: #003366; font-weight: 700;">TÊN THƯ MỤC</h4>
+                
+                <!-- DANH SÁCH FILE -->
                 <div id="folderContent"></div>
             </div>
 
