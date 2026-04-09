@@ -295,27 +295,31 @@
         }
 
         function verifyCode() {
-            const userCode = document.getElementById('inputCode').value.trim();
-            if (!userCode) { alert("Vui lòng nhập mã!"); return; }
+    const userCode = document.getElementById('inputCode').value.trim();
+    if (!userCode) { alert("Vui lòng nhập mã!"); return; }
 
-            fetch(`pass/${currentExamId}.txt?t=${new Date().getTime()}`)
-                .then(response => {
-                    if (!response.ok) throw new Error("Không tìm thấy file pass");
-                    return response.text();
-                })
-                .then(serverCode => {
-                    if (userCode.toUpperCase() === serverCode.trim().toUpperCase()) {
-                        checkAndRenderContent(currentExamId);
-                    } else {
-                        document.getElementById('msgError').style.display = 'block';
-                        document.getElementById('msgError').innerText = "Mã xác nhận không chính xác!";
-                    }
-                })
-                .catch(err => {
-                    console.error(err);
-                    alert("Lỗi: Không tìm thấy file mật khẩu!");
-                });
-        }
+    fetch(`pass/${currentExamId}.txt?t=${new Date().getTime()}`)
+        .then(response => {
+            if (!response.ok) throw new Error("Không tìm thấy file pass");
+            return response.text();
+        })
+        .then(serverHash => {
+            // Mã hóa code người dùng nhập vào
+            const hashedUserCode = CryptoJS.MD5(userCode.toUpperCase()).toString();
+            
+            // So sánh 2 mã Hash
+            if (hashedUserCode === serverHash.trim().toLowerCase()) {
+                checkAndRenderContent(currentExamId);
+            } else {
+                document.getElementById('msgError').style.display = 'block';
+                document.getElementById('msgError').innerText = "Mã xác nhận không chính xác!";
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Lỗi: Không tìm thấy file mật khẩu!");
+        });
+}
 
         // --- CẬP NHẬT LOGIC KIỂM TRA ĐỂ LOAD TỪ FILE .TXT HOẶC GÁN TRỰC TIẾP ---
         function checkAndRenderContent(id) {
