@@ -477,10 +477,24 @@
                                 folderView.innerHTML = '<h5 style="width: 100%; text-align: center; color: #d32f2f; margin-bottom: 10px;">TÌM THẤY BÀI GIẢNG / TÀI LIỆU KHÁC</h5>';
                                 
                                 links.forEach((link, index) => {
+                                    // Sửa lỗi nếu link trong file txt vô tình quên gõ "https://"
+                                    let validUrl = link;
+                                    if (!validUrl.startsWith('http://') && !validUrl.startsWith('https://')) {
+                                        validUrl = 'https://' + validUrl;
+                                    }
+
                                     var btn = document.createElement('div');
                                     btn.className = 'folder-item';
-                                    btn.innerHTML = `<i class="fa-solid fa-link"></i> Mở liên kết số ${index + 1}`;
-                                    btn.onclick = function() { window.open(link, '_blank'); };
+                                    
+                                    // Cập nhật giao diện nút: Hiện tên "Mở liên kết số X" và hiển thị Link ở dưới
+                                    btn.innerHTML = `
+                                        <div style="margin-bottom: 5px;"><i class="fa-solid fa-link"></i> MỞ LIÊN KẾT SỐ ${index + 1}</div>
+                                        <div style="font-size: 13px; color: #0d6efd; text-transform: none; word-break: break-all; font-weight: 500;">
+                                            (${link})
+                                        </div>
+                                    `;
+                                    
+                                    btn.onclick = function() { window.open(validUrl, '_blank'); };
                                     folderView.appendChild(btn);
                                 });
                                 folderView.style.display = 'flex';
