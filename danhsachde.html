@@ -23,6 +23,8 @@
         .menu-item i { margin-right: 15px; width: 20px; text-align: center; font-size: 18px; transition: 0.3s; }
         .menu-item:hover { background-color: #f1f1f1; color: #333; }
         .menu-item.active { background-color: #fff0f0; color: #d32f2f; border-left: 4px solid #d32f2f; }
+        
+        /* Main Content */
         .main-content { margin-left: 250px; height: 100vh; display: flex; flex-direction: column; transition: margin-left 0.3s ease; }
         .top-header { height: 60px; background: white; border-bottom: 1px solid #dee2e6; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; flex-shrink: 0; }
         .toggle-btn { border: none; background: transparent; font-size: 20px; cursor: pointer; color: #333; padding: 5px 10px; }
@@ -33,6 +35,7 @@
         .logout-text { font-size: 12px; color: #d32f2f; cursor: pointer; }
         .footer { position: fixed; bottom: 10px; left: 250px; right: 0; text-align: center; color: #888; font-size: 12px; pointer-events: none; transition: left 0.3s ease; }
         
+        /* Collapsed Sidebar */
         body.collapsed .sidebar { width: 80px; }
         body.collapsed .main-content { margin-left: 80px; }
         body.collapsed .footer { left: 80px; }
@@ -44,57 +47,39 @@
 
         .content-scroll { overflow-y: auto; padding: 20px; flex-grow: 1; position: relative; display: flex; flex-direction: column; align-items: center;}
         
+        /* List Section */
         #listSection { width: 100%; }
         .exam-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
         .exam-card { background: white; border: 1px solid #dee2e6; border-radius: 8px; padding: 20px; transition: 0.3s; position: relative; }
         .exam-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-color: #d32f2f; }
- 
-        .tag-badge { 
-            position: absolute; 
-            top: 15px; 
-            left: 15px; 
-            font-size: 12px; 
-            padding: 2px 8px; 
-            border-radius: 4px; 
-            font-weight: bold; 
-            border: 1px solid transparent; 
-        }
-
+        .tag-badge { position: absolute; top: 15px; left: 15px; font-size: 12px; padding: 2px 8px; border-radius: 4px; font-weight: bold; border: 1px solid transparent; }
         .tag-green { background: #e8f5e9; color: #2e7d32; border-color: #a5d6a7; }
         .tag-blue { background: #e7f1ff; color: #0d6efd; border-color: #9ec5fe; }
         .tag-red { background: #f8d7da; color: #d32f2f; border-color: #f1aeb5; }
         .tag-english { background: #1a237e; color: #ffffff; border-color: #7b1fa2; }
-
         .exam-name { margin-top: 25px; font-weight: 700; font-size: 16px; margin-bottom: 20px; line-height: 1.4; color: #333; }
         .btn-continue { width: 100%; border: 1px solid #0d6efd; color: #0d6efd; background: white; padding: 8px; border-radius: 20px; font-weight: 600; transition: 0.3s; text-transform: uppercase; font-size: 14px; }
         .btn-continue:hover { background: #0d6efd; color: white; }
 
+        /* Auth Section */
         #authSection { display: none; width: 100%; max-width: 600px; margin-top: 40px; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); text-align: center; }
         .auth-logo { max-width: 200px; margin-bottom: 20px; }
         .form-check-group { display: flex; align-items: center; margin-bottom: 20px; }
-        .form-check-group label { 
-            background: #f8f9fa; display: flex; align-items: center; height: 50px; padding: 0 18px; border-radius: 8px 0 0 8px; 
-            border: 1px solid #ced4da; border-right: none; font-weight: 600; color: #495057; white-space: nowrap;
-        }
-        .form-check-group input { 
-            border-radius: 0 8px 8px 0; height: 50px; font-size: 16px; font-weight: bold; letter-spacing: 1px; color: #0d6efd; text-align: center; 
-        }
+        .form-check-group label { background: #f8f9fa; display: flex; align-items: center; height: 50px; padding: 0 18px; border-radius: 8px 0 0 8px; border: 1px solid #ced4da; border-right: none; font-weight: 600; color: #495057; white-space: nowrap; }
+        .form-check-group input { border-radius: 0 8px 8px 0; height: 50px; font-size: 16px; font-weight: bold; letter-spacing: 1px; color: #0d6efd; text-align: center; }
         .form-check-group input:focus { border-color: #86b7fe; box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); z-index: 1; }
         .btn-check-code { background: #0044cc; color: white; width: 100%; padding: 10px; border-radius: 6px; font-weight: 600; border: none; }
         .btn-check-code:hover { background: #003399; }
         .back-link { display: inline-block; color: #0d6efd; text-decoration: none; font-size: 14px; cursor: pointer; }
         .back-link:hover { text-decoration: underline; }
 
-        /* --- FOLDER VIEW --- */
+        /* Folder View */
         #folderView { width: 100%; max-width: 800px; display: none; flex-direction: column; margin-top: 20px; }
-        
         #folderContent { display: flex; flex-direction: column; gap: 15px; width: 100%; }
-        .folder-item {
-            background: white; border: 2px solid #0dcaf0; border-radius: 10px; padding: 15px 20px; text-align: center;
-            font-weight: 700; color: #333; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-transform: uppercase;
-        }
+        .folder-item { background: white; border: 2px solid #0dcaf0; border-radius: 10px; padding: 15px 20px; text-align: center; font-weight: 700; color: #333; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-transform: uppercase; }
         .folder-item:hover { background-color: #e0f7fa; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
 
+        /* PDF View */
         #pdfSection { display: none; width: 100%; height: 100%; flex-direction: column; }
         .pdf-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; width: 100%; }
         .pdf-toolbar { display: flex; justify-content: flex-end; gap: 10px; }
@@ -112,15 +97,9 @@
             <img src="img/rutgon.jpg" alt="HSA" class="logo-icon">
         </div>
         <div class="sidebar-menu">
-            <a href="danhsachde.html" class="menu-item active">
-                <i class="fa-regular fa-clock"></i> <span>Danh sách đề</span>
-            </a>
-            <a href="index.html" class="menu-item">
-                <i class="fa-solid fa-magnifying-glass"></i> <span>Tra cứu</span>
-            </a>
-            <a href="khaothi.html" class="menu-item">
-                <i class="fa-solid fa-file-signature"></i> <span>Khảo thí</span>
-            </a>
+            <a href="danhsachde.html" class="menu-item active"><i class="fa-regular fa-clock"></i> <span>Danh sách đề</span></a>
+            <a href="index.html" class="menu-item"><i class="fa-solid fa-magnifying-glass"></i> <span>Tra cứu</span></a>
+            <a href="khaothi.html" class="menu-item"><i class="fa-solid fa-file-signature"></i> <span>Khảo thí</span></a>
         </div>
     </div>
 
@@ -136,62 +115,50 @@
 
         <div class="content-scroll">
             
+            <!-- Danh sách đề -->
             <div id="listSection">
                 <h4 style="color: #003366; font-weight: 700; margin-bottom: 20px;">Danh sách tài liệu</h4>
                 <div class="exam-grid" id="examContainer"></div>
             </div>
 
+            <!-- Xác thực mật khẩu -->
             <div id="authSection">
                 <div class="text-start mb-3"><span class="back-link" onclick="goBackToList()"><i class="fa-solid fa-arrow-left"></i> Quay lại danh sách</span></div>
-                
                 <h5 id="selectedExamTitle" style="font-weight: 700; margin-bottom: 20px;">TÊN ĐỀ THI</h5>
                 <img src="img/logo.jpg" alt="Logo" class="auth-logo">
                 <p>Xác nhận thông tin</p>
                 <div class="form-check-group">
                     <label>Mã xác nhận</label>
-                    <input type="text" id="inputCode" class="form-control" placeholder="" autocomplete="off">
+                    <input type="text" id="inputCode" class="form-control" autocomplete="off">
                 </div>
                 <p class="text-start text-primary" style="font-size: 13px; font-style: italic;">Vui lòng liên hệ với người quản trị để nhận code</p>
                 <button class="btn-check-code" onclick="verifyCode()">Bắt đầu</button>
                 <div id="msgError" class="text-danger mt-2" style="display:none; font-size:14px;"><i class="fa-solid fa-triangle-exclamation"></i> Mã xác nhận không chính xác!</div>
             </div>
 
-            <!-- FOLDER VIEW CẬP NHẬT -->
-            <!-- FOLDER VIEW CẬP NHẬT -->
+            <!-- Hiển thị thư mục (Folder / Link View) -->
             <div id="folderView">
-                <!-- Header của Folder: Nút back bên trái, Ghi chú ở giữa -->
                 <div class="d-flex align-items-center justify-content-center position-relative mb-3" style="width: 100%; min-height: 40px;">
                     <span class="back-link position-absolute start-0" id="btnFolderBack" onclick="goBackToAuth()" style="margin: 0; z-index: 10;">
-    <i class="fa-solid fa-arrow-left"></i> Quay lại nhập mã
-</span>
-                    <h3 class="m-0 fw-bold text-dark" id="folderNoteText">Ghi chú: Nếu không thấy chỗ ghi ID thì ID chính là các kí tự hiện trên thanh bạn nhấp vào<span id="dynamicNote" style="font-weight: 500; font-size: 1.2rem; color: #d32f2f;"></span></h3>
+                        <i class="fa-solid fa-arrow-left"></i> Quay lại nhập mã
+                    </span>
+                    <h3 class="m-0 fw-bold text-dark" id="folderNoteText">Ghi chú: Nếu không thấy chỗ ghi ID thì ID chính là các kí tự hiện trên thanh bạn nhấp vào</h3>
                 </div>
-
-                <!-- TITLE HIỂN THỊ TÊN THƯ MỤC / CHỦ ĐỀ -->
                 <h4 id="folderViewTitle" class="text-center mb-4" style="color: #003366; font-weight: 700;">TÊN THƯ MỤC</h4>
-                
-                <!-- DANH SÁCH FILE -->
                 <div id="folderContent"></div>
             </div>
 
-            <!-- PDF VIEW CẬP NHẬT -->
+            <!-- Khung xem PDF -->
             <div id="pdfSection">
                 <div class="pdf-header">
-                    <div style="flex: 1;">
-                        <span class="back-link" id="btnBackPDF" onclick="goBackFromPDF()"><i class="fa-solid fa-arrow-left"></i> Quay lại</span>
-                    </div>
-                    <!-- TITLE HIỂN THỊ TÊN FILE PDF -->
-                    <div style="flex: 2; text-align: center;">
-                        <h6 id="pdfViewTitle" style="margin: 0; font-weight: bold; color: #d32f2f; text-transform: uppercase;">Tên File</h6>
-                    </div>
+                    <div style="flex: 1;"><span class="back-link" id="btnBackPDF" onclick="goBackFromPDF()"><i class="fa-solid fa-arrow-left"></i> Quay lại</span></div>
+                    <div style="flex: 2; text-align: center;"><h6 id="pdfViewTitle" style="margin: 0; font-weight: bold; color: #d32f2f; text-transform: uppercase;">Tên File</h6></div>
                     <div class="pdf-toolbar" style="flex: 1;">
                         <button class="btn-tool" onclick="rotatePDF()"><i class="fa-solid fa-rotate-right"></i> Xoay ngang</button>
                         <button class="btn-tool" onclick="openNewTab()"><i class="fa-solid fa-expand"></i> Toàn màn hình</button>
                     </div>
                 </div>
-                <div id="iframeContainer">
-                    <iframe id="pdfFrame" src=""></iframe>
-                </div>
+                <div id="iframeContainer"><iframe id="pdfFrame" src=""></iframe></div>
             </div>
 
             <div class="footer">&copy; 2026 NGUYỄN ANH TUẤN - K58 - THPT YÊN ĐỊNH 1 - 0818103265</div>
@@ -200,9 +167,8 @@
 
     <script>
         // ===============================================
-        // CẤU HÌNH DỮ LIỆU
+        // 1. CẤU HÌNH DỮ LIỆU
         // ===============================================
-        
         const DANH_SACH_DE = [
             { id: 1, name: "1. ĐỀ MÔN LỊCH SỬ (ĐỀ 01-20)", tag: "HSA" },
             { id: 2, name: "2. ĐỀ TƯ DUY ĐỊNH LƯỢNG (ĐỀ 01-10)", tag: "HSA" },
@@ -223,297 +189,251 @@
             { id: 17, name: "17. KHOA HỌC LAB", tag: "TSA" },
         ];
 
-        // KHAI BÁO FILE TRONG FOLDER
-        // LƯU Ý ĐÃ SỬA LỖI CÚ PHÁP CHO ID 12 VÀ 13 THÀNH CHUỖI STRING MÀU ĐỎ ""
         const DU_LIEU_FOLDER = {
-            "2": [
-                { name: "1-5", file: "1-5.pdf", type: "pdf" },
-                { name: "6-10", file: "6-10.pdf", type: "pdf" }
-            ],
-            "4": [
-                { name: "TƯ DUY TOÁN HỌC (PDF)", file: "tuduytoanhoc.txt", type: "txt" },
-                { name: "TƯ DUY TOÁN HỌC (WORD)", file: "word.txt", type: "txt" }
-            ],
-            "5": [
-                { name: "TƯ DUY ĐỌC HIỂU (LĨNH VỰC VĂN HỌC) (PDF)", file: "pdf.txt", type: "txt" },
-                { name: "TƯ DUY ĐỌC HIỂU (LĨNH VỰC VĂN HỌC) (WORD)", file: "docx.txt", type: "txt" }
-            ],
-            "6": [
-                { name: "ĐỊNH TÍNH (PDF)", file: "body_merged.pdf", type: "pdf" },
-                { name: "ĐỊNH TÍNH PHẦN 1", file: "p1.pdf", type: "pdf" },
-                { name: "ĐỊNH TÍNH PHẦN 2", file: "p2.pdf", type: "pdf" },
-                { name: "ĐỊNH TÍNH (WORD)", file: "docx.txt", type: "txt" },
-                { name: "41 ĐỀ TỰ LUYỆN", file: "tuluyen.txt", type: "txt" }
-            ],
-            "7": [
-                { name: "PHẦN 1 (PDF)", file: "p1.pdf", type: "pdf" },
-                { name: "PHẦN 2 (PDF)", file: "body_merged_compressed.pdf", type: "pdf" }
-            ],
-            // Sử dụng đường dẫn link tới file .txt để load tự động danh sách PDF
+            "2": [{ name: "1-5", file: "1-5.pdf", type: "pdf" }, { name: "6-10", file: "6-10.pdf", type: "pdf" }],
+            "4": [{ name: "TƯ DUY TOÁN HỌC (PDF)", file: "tuduytoanhoc.txt", type: "txt" }, { name: "TƯ DUY TOÁN HỌC (WORD)", file: "word.txt", type: "txt" }],
+            "5": [{ name: "TƯ DUY ĐỌC HIỂU (LĨNH VỰC VĂN HỌC) (PDF)", file: "pdf.txt", type: "txt" }, { name: "TƯ DUY ĐỌC HIỂU (LĨNH VỰC VĂN HỌC) (WORD)", file: "docx.txt", type: "txt" }],
+            "6": [{ name: "ĐỊNH TÍNH (PDF)", file: "body_merged.pdf", type: "pdf" }, { name: "ĐỊNH TÍNH PHẦN 1", file: "p1.pdf", type: "pdf" }, { name: "ĐỊNH TÍNH PHẦN 2", file: "p2.pdf", type: "pdf" }, { name: "ĐỊNH TÍNH (WORD)", file: "docx.txt", type: "txt" }, { name: "41 ĐỀ TỰ LUYỆN", file: "tuluyen.txt", type: "txt" }],
+            "7": [{ name: "PHẦN 1 (PDF)", file: "p1.pdf", type: "pdf" }, { name: "PHẦN 2 (PDF)", file: "body_merged_compressed.pdf", type: "pdf" }],
             "12": "de/file/12.txt",
             "13": "de/file/13.txt",
             "14": "de/file/14.txt",
             "17": "de/17.txt"
-            
         };
 
         // ===============================================
-        
-        const listSection = document.getElementById('listSection');
-        const authSection = document.getElementById('authSection');
-        const folderView = document.getElementById('folderView');
-        const pdfSection = document.getElementById('pdfSection');
-        const examContainer = document.getElementById('examContainer');
-        const pdfFrame = document.getElementById('pdfFrame');
-        
+        // 2. BIẾN TOÀN CỤC & INIT
+        // ===============================================
         let currentExamId = null;
-        let currentExamName = ""; // Lưu trữ tên để hiển thị Title
+        let currentExamName = "";
         let currentRotation = 0;
         let isViewingFromFolder = false; 
         let currentPDFUrl = ""; 
 
+        // Render màn hình chính
         function renderExams() {
-            examContainer.innerHTML = '';
+            const container = document.getElementById('examContainer');
+            container.innerHTML = '';
             DANH_SACH_DE.forEach(exam => {
                 let tagClass = 'tag-green'; 
                 if (exam.tag === 'THPT') tagClass = 'tag-blue';
                 else if (exam.tag === 'TSA') tagClass = 'tag-red';
                 else if (exam.tag === 'Tiếng Anh') tagClass = 'tag-english';
 
-                const html = `
+                container.innerHTML += `
                     <div class="exam-card">
                         <span class="tag-badge ${tagClass}">${exam.tag}</span>
                         <h5 class="exam-name">${exam.name}</h5>
                         <button class="btn-continue" onclick="selectExam(${exam.id}, '${exam.name}')">Tiếp tục</button>
-                    </div>
-                `;
-                examContainer.innerHTML += html;
+                    </div>`;
             });
         }
 
+        // ===============================================
+        // 3. XỬ LÝ LOGIC CHUYỂN TRANG & BẢO MẬT
+        // ===============================================
         function selectExam(id, name) {
-            currentExamId = id;
-            currentExamName = name; // Cập nhật tên
+            currentExamId = id; currentExamName = name;
             document.getElementById('selectedExamTitle').innerText = name;
             document.getElementById('inputCode').value = '';
             document.getElementById('msgError').style.display = 'none';
-            listSection.style.display = 'none';
-            authSection.style.display = 'block';
+            document.getElementById('listSection').style.display = 'none';
+            document.getElementById('authSection').style.display = 'block';
         }
 
         function verifyCode() {
-    const userCode = document.getElementById('inputCode').value.trim();
-    if (!userCode) { alert("Vui lòng nhập mã!"); return; }
+            const userCode = document.getElementById('inputCode').value.trim();
+            if (!userCode) { alert("Vui lòng nhập mã!"); return; }
 
-    fetch(`pass/${currentExamId}.txt?t=${new Date().getTime()}`)
-        .then(response => {
-            if (!response.ok) throw new Error("Không tìm thấy file pass");
-            return response.text();
-        })
-        .then(serverHash => {
-            // Mã hóa code người dùng nhập vào
-            const hashedUserCode = CryptoJS.MD5(userCode.toUpperCase()).toString();
-            
-            // So sánh 2 mã Hash
-            if (hashedUserCode === serverHash.trim().toLowerCase()) {
-                checkAndRenderContent(currentExamId);
-            } else {
-                document.getElementById('msgError').style.display = 'block';
-                document.getElementById('msgError').innerText = "Mã xác nhận không chính xác!";
-            }
-        })
-        .catch(err => {
-            console.error(err);
-            alert("Lỗi: Không tìm thấy file mật khẩu!");
-        });
-}
+            fetch(`pass/${currentExamId}.txt?t=${new Date().getTime()}`)
+                .then(res => { if (!res.ok) throw new Error("No pass file"); return res.text(); })
+                .then(serverHash => {
+                    if (CryptoJS.MD5(userCode.toUpperCase()).toString() === serverHash.trim().toLowerCase()) {
+                        checkAndRenderContent(currentExamId);
+                    } else {
+                        document.getElementById('msgError').style.display = 'block';
+                    }
+                })
+                .catch(() => alert("Lỗi: Không tìm thấy file mật khẩu!"));
+        }
 
-        // --- CẬP NHẬT LOGIC KIỂM TRA ĐỂ LOAD TỪ FILE .TXT HOẶC GÁN TRỰC TIẾP ---
+        // ===============================================
+        // 4. XỬ LÝ ĐỌC CẤU TRÚC FILE/LINK
+        // ===============================================
         function checkAndRenderContent(id) {
-    const idStr = id.toString();
-    document.getElementById('folderViewTitle').innerText = currentExamName; // Set Title folder
-    
-    // Reset lại nút Back mặc định (tránh bị kẹt trạng thái khi đang xem link txt)
-    const btnFolderBack = document.getElementById('btnFolderBack');
-    if(btnFolderBack) {
-        btnFolderBack.innerHTML = '<i class="fa-solid fa-arrow-left"></i> Quay lại nhập mã';
-        btnFolderBack.onclick = goBackToAuth;
-    }
+            document.getElementById('folderViewTitle').innerText = currentExamName;
+            
+            // Đặt lại nút Back mặc định
+            const btnFolderBack = document.getElementById('btnFolderBack');
+            if(btnFolderBack) {
+                btnFolderBack.innerHTML = '<i class="fa-solid fa-arrow-left"></i> Quay lại nhập mã';
+                btnFolderBack.onclick = goBackToAuth;
+            }
 
-    if (DU_LIEU_FOLDER.hasOwnProperty(idStr)) {
-        const folderData = DU_LIEU_FOLDER[idStr];
+            const folderData = DU_LIEU_FOLDER[id.toString()];
 
-        // Nếu data là chuỗi đường dẫn (.txt)
-        if (typeof folderData === 'string' && folderData.endsWith('.txt')) {
-            fetch(folderData + `?t=${new Date().getTime()}`)
-                .then(res => {
-                    if (!res.ok) throw new Error("File not found");
-                    return res.text();
-                })
-                .then(text => {
-                    const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
-                    const dynamicFiles = lines.map(line => {
-                        const isPdf = line.toLowerCase().endsWith('.pdf');
-                        return {
-                            name: line.replace(/\.pdf$/i, '').replace(/\.txt$/i, ''),
-                            file: line,
-                            type: isPdf ? 'pdf' : 'txt'
-                        };
-                    });
-                    renderFolderItems(dynamicFiles);
+            if (folderData) {
+                // Trường hợp cấu trúc đọc từ file txt động
+                if (typeof folderData === 'string' && folderData.endsWith('.txt')) {
+                    fetch(folderData + `?t=${new Date().getTime()}`)
+                        .then(res => { if (!res.ok) throw new Error("File not found"); return res.text(); })
+                        .then(text => {
+                            let linkCounter = 1;
+                            const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+                            
+                            const dynamicFiles = lines.map(line => {
+                                // Phân biệt link web và file local
+                                if (line.startsWith('http://') || line.startsWith('https://')) {
+                                    return { name: `MỞ LIÊN KẾT SỐ ${linkCounter++}`, file: line, type: 'link' };
+                                }
+                                return { 
+                                    name: line.replace(/\.pdf$/i, '').replace(/\.txt$/i, ''), 
+                                    file: line, 
+                                    type: line.toLowerCase().endsWith('.pdf') ? 'pdf' : 'txt' 
+                                };
+                            });
+                            renderFolderItems(dynamicFiles);
+                            showFolderView();
+                        })
+                        .catch(err => alert(`Lỗi tải cấu trúc từ ${folderData}`));
+                } 
+                // Trường hợp array cấu hình sẵn
+                else {
+                    renderFolderItems(folderData);
                     showFolderView();
-                })
-                .catch(err => {
-                    console.error(err);
-                    alert(`Lỗi: Không thể tải cấu trúc danh sách từ file ${folderData}`);
-                });
-        } 
-        // Nếu data là Array fix cứng
-        else {
-            renderFolderItems(folderData);
-            showFolderView();
-        }
-    } else {
-        showPDF(`de/${id}.pdf`, false, currentExamName); 
-    }
-}
-
-        function showFolderView() {
-            authSection.style.display = 'none';
-            folderView.style.display = 'flex';
+                }
+            } else {
+                // Không có khai báo thư mục -> Load file pdf mặc định
+                showPDF(`de/${id}.pdf`, false, currentExamName); 
+            }
         }
 
+        // Hiển thị giao diện danh sách file/link
         function renderFolderItems(files) {
             const container = document.getElementById('folderContent');
             container.innerHTML = ''; 
             files.forEach(file => {
                 const btn = document.createElement('div');
                 btn.className = 'folder-item';
-                btn.textContent = file.name;
-                btn.onclick = function() {
-                    handleFolderItemClick(file);
-                };
+                
+                // Styling riêng nếu là link web
+                if (file.type === 'link') {
+                    btn.innerHTML = `
+                        <div style="margin-bottom: 5px;"><i class="fa-solid fa-link"></i> ${file.name}</div>
+                        <div style="font-size: 13px; color: #0d6efd; text-transform: none; word-break: break-all; font-weight: 500;">(${file.file})</div>`;
+                } else {
+                    btn.textContent = file.name;
+                }
+
+                btn.onclick = () => handleFolderItemClick(file);
                 container.appendChild(btn);
             });
         }
 
+        // Xử lý khi click vào từng item trong thư mục
         function handleFolderItemClick(fileData) {
-    const path = `de/${currentExamId}/${fileData.file}`;
-    
-    if (fileData.type === 'txt') {
-        fetch(path).then(res => {
-            if(!res.ok) throw new Error("404");
-            return res.text();
-        }).then(text => {
-            // Lọc các link giống hệt index.html
-            var links = text.split('\n').map(l => l.trim()).filter(l => l !== '');
-            
-            if (links.length > 0) {
-                const container = document.getElementById('folderContent');
-                container.innerHTML = ''; // Xóa danh sách file cũ để đè danh sách link lên
-
-                // Đổi Title thành tên file txt đang xem
-                document.getElementById('folderViewTitle').innerText = fileData.name;
-
-                // Thay đổi hành vi của nút Back -> Quay lại danh sách file trong thư mục
-                const btnFolderBack = document.getElementById('btnFolderBack');
-                btnFolderBack.innerHTML = '<i class="fa-solid fa-arrow-left"></i> Quay lại thư mục';
-                btnFolderBack.onclick = function() { checkAndRenderContent(currentExamId); };
-
-                // Render giao diện từng link
-                links.forEach((link, index) => {
-                    let validUrl = link;
-                    if (!validUrl.startsWith('http://') && !validUrl.startsWith('https://')) {
-                        validUrl = 'https://' + validUrl;
-                    }
-
-                    const btn = document.createElement('div');
-                    btn.className = 'folder-item';
-                    
-                    // Giao diện nút giống bên index.html
-                    btn.innerHTML = `
-                        <div style="margin-bottom: 5px;"><i class="fa-solid fa-link"></i> MỞ LIÊN KẾT SỐ ${index + 1}</div>
-                        <div style="font-size: 13px; color: #0d6efd; text-transform: none; word-break: break-all; font-weight: 500;">
-                            (${link})
-                        </div>
-                    `;
-                    
-                    btn.onclick = function() { window.open(validUrl, '_blank'); };
-                    container.appendChild(btn);
-                });
-            } else {
-                alert("File text hiện tại đang trống hoặc không có liên kết!");
+            // 1. Mở thẳng tab mới nếu là Link
+            if (fileData.type === 'link') {
+                window.open(fileData.file, '_blank');
+                return;
             }
-        }).catch(err => {
-            alert("Lỗi: Không tìm thấy hoặc không thể đọc file txt!");
-        });
-        
-    } else if (fileData.type === 'pdf') {
-        showPDF(path, true, fileData.name);
-    }
-}
 
-        // --- CẬP NHẬT HIỂN THỊ TITLE CHO PDF ---
+            // 2. Mở File PDF
+            const path = `de/${currentExamId}/${fileData.file}`;
+            if (fileData.type === 'pdf') {
+                showPDF(path, true, fileData.name);
+                return;
+            }
+
+            // 3. Đọc File TXT phụ (nội bộ chứa link)
+            if (fileData.type === 'txt') {
+                fetch(path)
+                    .then(res => { if(!res.ok) throw new Error("404"); return res.text(); })
+                    .then(text => {
+                        const links = text.split('\n').map(l => l.trim()).filter(l => l !== '');
+                        if (links.length > 0) {
+                            // Cập nhật lại giao diện thư mục để hiển thị list link
+                            const container = document.getElementById('folderContent');
+                            container.innerHTML = ''; 
+                            document.getElementById('folderViewTitle').innerText = fileData.name;
+
+                            // Đổi nút back
+                            const btnFolderBack = document.getElementById('btnFolderBack');
+                            btnFolderBack.innerHTML = '<i class="fa-solid fa-arrow-left"></i> Quay lại thư mục';
+                            btnFolderBack.onclick = () => checkAndRenderContent(currentExamId);
+
+                            links.forEach((link, index) => {
+                                let validUrl = link;
+                                if (!validUrl.startsWith('http://') && !validUrl.startsWith('https://')) { validUrl = 'https://' + validUrl; }
+
+                                const btn = document.createElement('div');
+                                btn.className = 'folder-item';
+                                btn.innerHTML = `
+                                    <div style="margin-bottom: 5px;"><i class="fa-solid fa-link"></i> MỞ LIÊN KẾT SỐ ${index + 1}</div>
+                                    <div style="font-size: 13px; color: #0d6efd; text-transform: none; word-break: break-all; font-weight: 500;">(${link})</div>`;
+                                btn.onclick = () => window.open(validUrl, '_blank');
+                                container.appendChild(btn);
+                            });
+                        } else {
+                            alert("File trống hoặc không có liên kết!");
+                        }
+                    }).catch(() => alert("Lỗi: Không thể đọc file txt!"));
+            }
+        }
+
+        // ===============================================
+        // 5. HIỂN THỊ PDF & NÚT ĐIỀU HƯỚNG CƠ BẢN
+        // ===============================================
+        function showFolderView() {
+            document.getElementById('authSection').style.display = 'none';
+            document.getElementById('folderView').style.display = 'flex';
+        }
+
         function showPDF(path, fromFolder, title = "") {
             isViewingFromFolder = fromFolder;
             currentPDFUrl = path;
-
             document.getElementById('pdfViewTitle').innerText = title ? title : currentExamName;
-
-            authSection.style.display = 'none';
-            folderView.style.display = 'none';
-            pdfSection.style.display = 'flex';
-            pdfFrame.src = path + "#toolbar=0&navpanes=0&scrollbar=0&view=FitH";
+            document.getElementById('authSection').style.display = 'none';
+            document.getElementById('folderView').style.display = 'none';
+            document.getElementById('pdfSection').style.display = 'flex';
+            
+            const frame = document.getElementById('pdfFrame');
+            frame.src = path + "#toolbar=0&navpanes=0&scrollbar=0&view=FitH";
             currentRotation = 0;
-            pdfFrame.style.transform = 'rotate(0deg) scale(1)';
+            frame.style.transform = 'rotate(0deg) scale(1)';
         }
 
         function goBackToList() {
-            authSection.style.display = 'none';
-            listSection.style.display = 'block';
+            document.getElementById('authSection').style.display = 'none';
+            document.getElementById('listSection').style.display = 'block';
             currentExamId = null;
         }
 
         function goBackToAuth() {
-            folderView.style.display = 'none';
-            authSection.style.display = 'block';
+            document.getElementById('folderView').style.display = 'none';
+            document.getElementById('authSection').style.display = 'block';
         }
 
         function goBackFromPDF() {
-            pdfSection.style.display = 'none';
-            pdfFrame.src = ""; 
-            if (isViewingFromFolder) {
-                folderView.style.display = 'flex';
-            } else {
-                authSection.style.display = 'block';
-            }
+            document.getElementById('pdfSection').style.display = 'none';
+            document.getElementById('pdfFrame').src = ""; 
+            if (isViewingFromFolder) document.getElementById('folderView').style.display = 'flex';
+            else document.getElementById('authSection').style.display = 'block';
         }
 
         function rotatePDF() {
             currentRotation = (currentRotation + 90) % 360;
             const iframe = document.getElementById('pdfFrame');
-            iframe.style.transform = `rotate(${currentRotation}deg)`;
-            if (currentRotation === 90 || currentRotation === 270) {
-                iframe.style.transform += " scale(1.5)"; 
-            } else {
-                iframe.style.transform += " scale(1)";
-            }
+            iframe.style.transform = `rotate(${currentRotation}deg) ${(currentRotation === 90 || currentRotation === 270) ? 'scale(1.5)' : 'scale(1)'}`;
         }
 
-        function openNewTab() {
-            if (currentPDFUrl) {
-                window.open(currentPDFUrl, '_blank');
-            }
-        }
+        function openNewTab() { if (currentPDFUrl) window.open(currentPDFUrl, '_blank'); }
 
-        document.getElementById('sidebarToggle').addEventListener('click', function() {
-            document.body.classList.toggle('collapsed');
-        });
+        // Event Listeners
+        document.getElementById('sidebarToggle').addEventListener('click', () => document.body.classList.toggle('collapsed'));
+        document.getElementById('inputCode').addEventListener("keypress", (e) => { if (e.key === "Enter") verifyCode(); });
 
-        document.getElementById('inputCode').addEventListener("keypress", function(event) {
-            if (event.key === "Enter") verifyCode();
-        });
-
+        // Khởi động
         renderExams();
     </script>
 </body>
