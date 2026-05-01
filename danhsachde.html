@@ -161,9 +161,9 @@
             <div id="folderView">
                 <!-- Header của Folder: Nút back bên trái, Ghi chú ở giữa -->
                 <div class="d-flex align-items-center justify-content-center position-relative mb-3" style="width: 100%; min-height: 40px;">
-                    <span class="back-link position-absolute start-0" onclick="goBackToAuth()" style="margin: 0; z-index: 10;">
-                        <i class="fa-solid fa-arrow-left"></i> Quay lại nhập mã
-                    </span>
+                    <span class="back-link position-absolute start-0" id="btnFolderBack" onclick="goBackToAuth()" style="margin: 0; z-index: 10;">
+    <i class="fa-solid fa-arrow-left"></i> Quay lại nhập mã
+</span>
                     <h3 class="m-0 fw-bold text-dark" id="folderNoteText">Ghi chú: Nếu không thấy chỗ ghi ID thì ID chính là các kí tự hiện trên thanh bạn nhấp vào<span id="dynamicNote" style="font-weight: 500; font-size: 1.2rem; color: #d32f2f;"></span></h3>
                 </div>
 
@@ -328,47 +328,53 @@
 
         // --- CẬP NHẬT LOGIC KIỂM TRA ĐỂ LOAD TỪ FILE .TXT HOẶC GÁN TRỰC TIẾP ---
         function checkAndRenderContent(id) {
-            const idStr = id.toString();
-            document.getElementById('folderViewTitle').innerText = currentExamName; // Set Title folder
+    const idStr = id.toString();
+    document.getElementById('folderViewTitle').innerText = currentExamName; // Set Title folder
+    
+    // Reset lại nút Back mặc định (tránh bị kẹt trạng thái khi đang xem link txt)
+    const btnFolderBack = document.getElementById('btnFolderBack');
+    if(btnFolderBack) {
+        btnFolderBack.innerHTML = '<i class="fa-solid fa-arrow-left"></i> Quay lại nhập mã';
+        btnFolderBack.onclick = goBackToAuth;
+    }
 
-            if (DU_LIEU_FOLDER.hasOwnProperty(idStr)) {
-                const folderData = DU_LIEU_FOLDER[idStr];
+    if (DU_LIEU_FOLDER.hasOwnProperty(idStr)) {
+        const folderData = DU_LIEU_FOLDER[idStr];
 
-                // Nếu data là chuỗi đường dẫn (.txt)
-                if (typeof folderData === 'string' && folderData.endsWith('.txt')) {
-                    fetch(folderData + `?t=${new Date().getTime()}`)
-                        .then(res => {
-                            if (!res.ok) throw new Error("File not found");
-                            return res.text();
-                        })
-                        .then(text => {
-                            // Cắt theo từng dòng để tạo danh sách array
-                            const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
-                            const dynamicFiles = lines.map(line => {
-                                const isPdf = line.toLowerCase().endsWith('.pdf');
-                                return {
-                                    name: line.replace(/\.pdf$/i, '').replace(/\.txt$/i, ''), // Tên hiển thị bỏ đuôi mở rộng
-                                    file: line,
-                                    type: isPdf ? 'pdf' : 'txt'
-                                };
-                            });
-                            renderFolderItems(dynamicFiles);
-                            showFolderView();
-                        })
-                        .catch(err => {
-                            console.error(err);
-                            alert(`Lỗi: Không thể tải cấu trúc danh sách từ file ${folderData}`);
-                        });
-                } 
-                // Nếu data là Array fix cứng
-                else {
-                    renderFolderItems(folderData);
+        // Nếu data là chuỗi đường dẫn (.txt)
+        if (typeof folderData === 'string' && folderData.endsWith('.txt')) {
+            fetch(folderData + `?t=${new Date().getTime()}`)
+                .then(res => {
+                    if (!res.ok) throw new Error("File not found");
+                    return res.text();
+                })
+                .then(text => {
+                    const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+                    const dynamicFiles = lines.map(line => {
+                        const isPdf = line.toLowerCase().endsWith('.pdf');
+                        return {
+                            name: line.replace(/\.pdf$/i, '').replace(/\.txt$/i, ''),
+                            file: line,
+                            type: isPdf ? 'pdf' : 'txt'
+                        };
+                    });
+                    renderFolderItems(dynamicFiles);
                     showFolderView();
-                }
-            } else {
-                showPDF(`de/${id}.pdf`, false, currentExamName); 
-            }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert(`Lỗi: Không thể tải cấu trúc danh sách từ file ${folderData}`);
+                });
+        } 
+        // Nếu data là Array fix cứng
+        else {
+            renderFolderItems(folderData);
+            showFolderView();
         }
+    } else {
+        showPDF(`de/${id}.pdf`, false, currentExamName); 
+    }
+}
 
         function showFolderView() {
             authSection.style.display = 'none';
@@ -390,20 +396,60 @@
         }
 
         function handleFolderItemClick(fileData) {
-            const path = `de/${currentExamId}/${fileData.file}`;
-            if (fileData.type === 'txt') {
-                fetch(path).then(res => {
-                    if(!res.ok) throw new Error("404");
-                    return res.text();
-                }).then(url => {
-                    if(url.trim()) window.open(url.trim(), '_blank');
-                }).catch(err => {
-                    alert("Lỗi: Không tìm thấy file txt!");
+    const path = `de/${currentExamId}/${fileData.file}`;
+    
+    if (fileData.type === 'txt') {
+        fetch(path).then(res => {
+            if(!res.ok) throw new Error("404");
+            return res.text();
+        }).then(text => {
+            // Lọc các link giống hệt index.html
+            var links = text.split('\n').map(l => l.trim()).filter(l => l !== '');
+            
+            if (links.length > 0) {
+                const container = document.getElementById('folderContent');
+                container.innerHTML = ''; // Xóa danh sách file cũ để đè danh sách link lên
+
+                // Đổi Title thành tên file txt đang xem
+                document.getElementById('folderViewTitle').innerText = fileData.name;
+
+                // Thay đổi hành vi của nút Back -> Quay lại danh sách file trong thư mục
+                const btnFolderBack = document.getElementById('btnFolderBack');
+                btnFolderBack.innerHTML = '<i class="fa-solid fa-arrow-left"></i> Quay lại thư mục';
+                btnFolderBack.onclick = function() { checkAndRenderContent(currentExamId); };
+
+                // Render giao diện từng link
+                links.forEach((link, index) => {
+                    let validUrl = link;
+                    if (!validUrl.startsWith('http://') && !validUrl.startsWith('https://')) {
+                        validUrl = 'https://' + validUrl;
+                    }
+
+                    const btn = document.createElement('div');
+                    btn.className = 'folder-item';
+                    
+                    // Giao diện nút giống bên index.html
+                    btn.innerHTML = `
+                        <div style="margin-bottom: 5px;"><i class="fa-solid fa-link"></i> MỞ LIÊN KẾT SỐ ${index + 1}</div>
+                        <div style="font-size: 13px; color: #0d6efd; text-transform: none; word-break: break-all; font-weight: 500;">
+                            (${link})
+                        </div>
+                    `;
+                    
+                    btn.onclick = function() { window.open(validUrl, '_blank'); };
+                    container.appendChild(btn);
                 });
-            } else if (fileData.type === 'pdf') {
-                showPDF(path, true, fileData.name); // Truyền tên file để làm Title cho khung PDF
+            } else {
+                alert("File text hiện tại đang trống hoặc không có liên kết!");
             }
-        }
+        }).catch(err => {
+            alert("Lỗi: Không tìm thấy hoặc không thể đọc file txt!");
+        });
+        
+    } else if (fileData.type === 'pdf') {
+        showPDF(path, true, fileData.name);
+    }
+}
 
         // --- CẬP NHẬT HIỂN THỊ TITLE CHO PDF ---
         function showPDF(path, fromFolder, title = "") {
