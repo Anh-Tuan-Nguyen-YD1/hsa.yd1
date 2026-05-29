@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Drive - DAP AN TOAN THAY AI</title>
+    <!-- Tailwind CSS để tạo giao diện đẹp và hiện đại -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome để vẽ các icon như PDF, Video -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+
+    <!-- Thanh điều hướng (Header) kiểu Google Drive -->
+    <header class="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between sticky top-0 z-50">
+        <div class="flex items-center space-x-3">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Google Drive Logo" class="w-8 h-8">
+            <span class="text-xl font-medium text-gray-600">Drive</span>
+        </div>
+        <div class="flex-1 max-w-xl mx-8 hidden md:block">
+            <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                    <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+                </span>
+                <input type="text" placeholder="Tìm trong Drive" class="w-full bg-gray-100 border border-transparent focus:bg-white focus:border-blue-500 rounded-full py-2 pl-10 pr-4 outline-none transition duration-200 text-sm">
+            </div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <i class="fa-regular fa-circle-question text-xl text-gray-600 cursor-pointer"></i>
+            <i class="fa-solid fa-gear text-xl text-gray-600 cursor-pointer"></i>
+            <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm cursor-pointer">A</div>
+        </div>
+    </header>
+
+    <!-- Khu vực chính -->
+    <div class="flex flex-1">
+        <!-- Sidebar bên trái -->
+        <aside class="w-64 border-r border-gray-200 p-4 hidden lg:block bg-white">
+            <button class="flex items-center space-x-3 px-6 py-3 bg-white border border-gray-300 rounded-full shadow-sm hover:shadow-md transition duration-200 mb-6">
+                <i class="fa-solid fa-plus text-lg text-blue-600"></i>
+                <span class="font-medium text-sm">Mới</span>
+            </button>
+            <nav class="space-y-1">
+                <a href="#" class="flex items-center space-x-3 px-4 py-2 bg-blue-50 text-blue-700 rounded-r-full font-medium text-sm">
+                    <i class="fa-solid fa-folder-open"></i>
+                    <span>Drive của tôi</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-r-full text-sm">
+                    <i class="fa-solid fa-laptop"></i>
+                    <span>Máy tính</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-r-full text-sm">
+                    <i class="fa-solid fa-user-group"></i>
+                    <span>Được chia sẻ với tôi</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-r-full text-sm">
+                    <i class="fa-regular fa-clock"></i>
+                    <span>Gần đây</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Danh sách file bên phải -->
+        <main class="flex-1 p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h1 class="text-xl font-semibold text-gray-800">DAPANTOANTHAYAI</h1>
+                <div class="flex items-center space-x-2 text-gray-500">
+                    <button class="p-2 hover:bg-gray-100 rounded-full"><i class="fa-solid fa-list"></i></button>
+                    <button class="p-2 hover:bg-gray-100 rounded-full"><i class="fa-solid fa-circle-info"></i></button>
+                </div>
+            </div>
+
+            <!-- Trạng thái tải dữ liệu -->
+            <div id="loading" class="flex flex-col items-center justify-center py-20">
+                <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-500 mb-4"></div>
+                <p class="text-gray-500 text-sm">Đang tải danh sách file...</p>
+            </div>
+
+            <!-- Grid hiển thị file -->
+            <div id="file-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 hidden">
+                <!-- Các file sẽ được JS tự động điền vào đây -->
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Cấu hình thông tin GitHub Repository của bạn
+        const OWNER = 'Anh-Tuan-Nguyen-YD1';
+        const REPO = 'hsa.yd1';
+        const PATH = 'DAPANTOANTHAYAI';
+        const API_URL = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`;
+
+        // Hàm sắp xếp tự nhiên (1, 2, 3... thay vì 1, 10, 11... 2)
+        function naturalSort(a, b) {
+            return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
+        }
+
+        // Hàm đọc nội dung file .txt để lấy link bên trong
+        async function fetchTxtContent(downloadUrl) {
+            try {
+                const response = await fetch(downloadUrl);
+                if (!response.ok) return null;
+                const text = await response.text();
+                return text.trim(); // Trả về đường link sau khi loại bỏ khoảng trắng dư thừa
+            } catch (error) {
+                console.error("Lỗi khi đọc file txt:", error);
+                return null;
+            }
+        }
+
+        // Hàm chính để tải và hiển thị dữ liệu
+        async function loadFiles() {
+            const loadingEl = document.getElementById('loading');
+            const gridEl = document.getElementById('file-grid');
+
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) {
+                    throw new Error('Không thể kết nối với GitHub API. Vui lòng kiểm tra lại cấu hình.');
+                }
+                let files = await response.json();
+
+                // Lọc bỏ thư mục ẩn hoặc file hệ thống nếu có, chỉ lấy file
+                files = files.filter(file => file.type === 'file');
+
+                // Sắp xếp thứ tự tự nhiên
+                files.sort(naturalSort);
+
+                for (const file of files) {
+                    const isPdf = file.name.endsWith('.pdf');
+                    const isTxt = file.name.endsWith('.txt');
+                    
+                    let targetUrl = file.html_url; // Mặc định chuyển đến trang GitHub của file nếu gặp lỗi
+                    let iconClass = "fa-solid fa-file text-gray-400";
+                    let cardBg = "bg-white";
+
+                    if (isPdf) {
+                        // Link trực tiếp để xem/tải PDF từ GitHub
+                        targetUrl = `https://raw.githubusercontent.com/${OWNER}/${REPO}/main/${PATH}/${file.name}`;
+                        iconClass = "fa-solid fa-file-pdf text-red-500 text-3xl";
+                    } else if (isTxt) {
+                        // Nếu là file txt, ta lấy link youtube bên trong file
+                        const rawUrl = file.download_url;
+                        const extractedLink = await fetchTxtContent(rawUrl);
+                        if (extractedLink && extractedLink.startsWith('http')) {
+                            targetUrl = extractedLink;
+                        }
+                        iconClass = "fa-solid fa-circle-play text-red-600 text-3xl"; // Đổi sang icon play video cho trực quan
+                    }
+
+                    // Tạo HTML cho từng file
+                    const fileCard = document.createElement('a');
+                    fileCard.href = targetUrl;
+                    fileCard.target = "_blank"; // Mở tab mới khi click
+                    fileCard.className = "flex flex-col bg-white border border-gray-200 rounded-lg hover:shadow-md hover:border-blue-400 transition duration-200 p-4 cursor-pointer overflow-hidden";
+                    
+                    fileCard.innerHTML = `
+                        <div class="flex items-center justify-center h-24 bg-gray-50 rounded-md mb-3">
+                            <i class="${iconClass}"></i>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <i class="${isPdf ? 'fa-solid fa-file-pdf text-red-500' : 'fa-solid fa-video text-red-600'} mt-1 text-sm"></i>
+                            <span class="text-sm font-medium text-gray-700 truncate w-full" title="${file.name}">
+                                ${file.name}
+                            </span>
+                        </div>
+                    `;
+                    gridEl.appendChild(fileCard);
+                }
+
+                // Ẩn loader và hiện danh sách
+                loadingEl.classList.add('hidden');
+                gridEl.classList.remove('hidden');
+
+            } catch (error) {
+                loadingEl.innerHTML = `<p class="text-red-500 font-semibold">${error.message}</p>`;
+            }
+        }
+
+        // Chạy hàm khi trang web tải xong
+        window.addEventListener('DOMContentLoaded', loadFiles);
+    </script>
+</body>
+</html>
